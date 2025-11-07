@@ -1,0 +1,66 @@
+base_lr: 0.075
+batch_size: 32
+config: BPM-GCN-master/BPM-GCN-master/config/EGait_journal/train_diff_combine_double_score_fagg.yaml
+device:
+- 1
+eval_interval: 5
+feeder: feeders.feeder_same_combine.Feeder
+ignore_weights: []
+log_interval: 100
+model: model.agcn_diff_combine_score_fagg.Model
+model_args:
+  graph: graph.EGait.Graph
+  graph_args:
+    labeling_mode: spatial
+  in_channels_m: 8
+  in_channels_p: 3
+  num_class: 4
+  num_constraints: 31
+  num_point: 16
+model_saved_name: /output/egait_runs/runs_diff_combine_fagg/fagg_att_cascade_st
+nesterov: true
+num_epoch: 125
+num_worker: 20
+only_train_epoch: 0
+only_train_part: false
+optimizer: SGD
+phase: train
+print_log: true
+save_interval: 2
+save_model: true
+save_score: true
+seed: 4
+show_topk:
+- 1
+- 2
+start_epoch: 0
+step:
+- 25
+- 50
+- 75
+- 100
+temperature: 0.8
+test_batch_size: 32
+test_feeder_args:
+  data_m_path: BPM-GCN-master/BPM-GCN-master/test_movement.npy
+  data_p_path: BPM-GCN-master/BPM-GCN-master/test_joint.npy
+  feature_path: BPM-GCN-master/BPM-GCN-master/test_affective.npy
+  label_path: BPM-GCN-master/BPM-GCN-master/test_label.pkl
+  normalization: false
+test_ratio: 0.1
+train_feeder_args:
+  data_m_path: BPM-GCN-master/BPM-GCN-master/train_movement.npy
+  data_p_path: BPM-GCN-master/BPM-GCN-master/train_joint.npy
+  debug: false
+  feature_path: BPM-GCN-master/BPM-GCN-master/train_affective.npy
+  label_path: BPM-GCN-master/BPM-GCN-master/train_label.pkl
+  normalization: false
+  random_choose: true
+  random_move: true
+  window_size: 48
+train_ratio: 0.9
+val_ratio: 0.0
+warm_up_epoch: 0
+weight_decay: 0.001
+weights: null
+work_dir: /output/egait_runs/work_diff_combine_fagg/fagg_att_cascade_st
